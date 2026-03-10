@@ -14,6 +14,8 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
+
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -64,11 +66,8 @@ const Navbar = () => {
           transition={{ delay: 0.5 }}
           className="hidden items-center gap-3 md:flex"
         >
-          <Button variant="ghost" size="sm" asChild>
-            <Link to="/login">Log In</Link>
-          </Button>
           <Button variant="hero" size="sm" asChild>
-            <Link to="/register">Get Started</Link>
+            <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
           </Button>
         </motion.div>
 
@@ -113,11 +112,8 @@ const Navbar = () => {
                 </motion.div>
               ))}
               <div className="flex gap-3 mt-3 pt-3 border-t border-border/50">
-                <Button variant="ghost" size="sm" asChild className="flex-1">
-                  <Link to="/login">Log In</Link>
-                </Button>
                 <Button variant="hero" size="sm" asChild className="flex-1">
-                  <Link to="/register">Get Started</Link>
+                  <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
                 </Button>
               </div>
             </div>

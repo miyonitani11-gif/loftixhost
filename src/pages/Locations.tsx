@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
-import { Globe, CheckCircle } from "lucide-react";
+import { Globe } from "lucide-react";
 
 const locations = [
   { city: "New York", country: "USA", region: "North America", status: "online" },
@@ -13,7 +13,7 @@ const locations = [
   { city: "Tokyo", country: "Japan", region: "Asia", status: "online" },
   { city: "Sydney", country: "Australia", region: "Oceania", status: "online" },
   { city: "São Paulo", country: "Brazil", region: "South America", status: "online" },
-  { city: "Mumbai", country: "India", region: "Asia", status: "coming soon" },
+  { city: "Mumbai", country: "India", region: "Asia", status: "online" },
   { city: "Toronto", country: "Canada", region: "North America", status: "online" },
 ];
 
@@ -46,12 +46,8 @@ const Locations = () => (
                   <div className="text-xs text-muted-foreground">{loc.region}</div>
                 </div>
               </div>
-              <span className={`text-xs font-medium px-2 py-1 rounded-full ${
-                loc.status === "online"
-                  ? "bg-green-500/10 text-green-400"
-                  : "bg-yellow-500/10 text-yellow-400"
-              }`}>
-                {loc.status === "online" ? "Online" : "Coming Soon"}
+              <span className="text-xs font-medium px-2 py-1 rounded-full bg-green-500/10 text-green-400">
+                Online
               </span>
             </motion.div>
           ))}

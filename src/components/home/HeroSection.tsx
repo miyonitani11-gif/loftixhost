@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Shield, Globe, Sparkles } from "lucide-react";
 
+const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -18,12 +20,10 @@ const itemVariants = {
 
 const HeroSection = () => (
   <section className="relative overflow-hidden py-28 md:py-40">
-    {/* Animated background */}
     <div className="hero-glow absolute inset-0 pointer-events-none" />
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px] pointer-events-none" />
     <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
 
-    {/* Floating particles */}
     {[...Array(5)].map((_, i) => (
       <motion.div
         key={i}
@@ -71,22 +71,21 @@ const HeroSection = () => (
 
         <motion.p variants={itemVariants} className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
           Deploy your Minecraft server in seconds with enterprise-grade hardware,
-          DDoS protection, and a powerful control panel. Starting at just $2/mo.
+          DDoS protection, and a powerful control panel. Starting at just ₹69/mo.
         </motion.p>
 
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button variant="hero" size="lg" asChild>
             <Link to="/pricing">
-              Get Started <ArrowRight className="h-4 w-4" />
+              View Plans <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
           <Button variant="heroOutline" size="lg" asChild>
-            <Link to="/features">View Features</Link>
+            <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
           </Button>
         </motion.div>
       </motion.div>
 
-      {/* Stats bar */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -96,7 +95,7 @@ const HeroSection = () => (
         {[
           { icon: Globe, value: "99.9%", label: "Uptime SLA" },
           { icon: Zap, value: "<50ms", label: "Avg Latency" },
-          { icon: Shield, value: "10Tbps", label: "DDoS Protection" },
+          { icon: Shield, value: "DDoS", label: "Protection" },
           { icon: Globe, value: "12+", label: "Global Locations" },
         ].map((stat, i) => (
           <motion.div

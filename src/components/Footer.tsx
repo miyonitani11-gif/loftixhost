@@ -1,44 +1,38 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Server, Github, Twitter, MessageCircle, Youtube } from "lucide-react";
+import { Server, MessageCircle, Youtube } from "lucide-react";
+
+const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
 
 const footerLinks = {
   Product: [
     { label: "Pricing", href: "/pricing" },
     { label: "Features", href: "/features" },
     { label: "Locations", href: "/locations" },
-    { label: "Game Panel", href: "/panel" },
+    { label: "Control Panel", href: "https://gp.loftix.host/", external: true },
   ],
   Company: [
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
     { label: "Status", href: "/status" },
-    { label: "Blog", href: "#" },
   ],
   Support: [
     { label: "Knowledgebase", href: "/knowledgebase" },
-    { label: "Support Tickets", href: "/support" },
-    { label: "Discord", href: "#" },
-    { label: "API Docs", href: "#" },
+    { label: "Discord", href: DISCORD_LINK, external: true },
   ],
   Legal: [
     { label: "Terms of Service", href: "#" },
     { label: "Privacy Policy", href: "#" },
     { label: "SLA", href: "#" },
-    { label: "AUP", href: "#" },
   ],
 };
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: MessageCircle, href: "#", label: "Discord" },
+  { icon: MessageCircle, href: DISCORD_LINK, label: "Discord" },
   { icon: Youtube, href: "#", label: "YouTube" },
 ];
 
 const Footer = () => (
   <footer className="border-t border-border/50 bg-muted/30 relative overflow-hidden">
-    {/* Subtle grid background */}
     <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
     <div className="container mx-auto px-4 py-16 relative z-10">
@@ -53,13 +47,15 @@ const Footer = () => (
             </span>
           </Link>
           <p className="text-sm text-muted-foreground mb-6 max-w-xs">
-            Premium Minecraft server hosting by ankitplayz. Instant deployment, DDoS protection, and 24/7 support.
+            Premium Minecraft server hosting by OG ANKIT. Instant deployment, DDoS protection, and 24/7 support.
           </p>
           <div className="flex gap-3">
             {socialLinks.map((social, i) => (
               <a
                 key={i}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={social.label}
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
               >
@@ -75,12 +71,23 @@ const Footer = () => (
             <ul className="space-y-2">
               {links.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
+                  {(link as any).external ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -90,7 +97,7 @@ const Footer = () => (
 
       <div className="mt-12 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted-foreground">
-          © 2026 LoftixHost by ankitplayz. All rights reserved.
+          © 2026 LoftixHost by OG ANKIT. All rights reserved.
         </p>
         <p className="text-sm text-muted-foreground">
           Powered by enterprise-grade infrastructure
