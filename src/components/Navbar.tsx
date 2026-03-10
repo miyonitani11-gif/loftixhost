@@ -30,9 +30,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center gap-2 hover-scale">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-bg animate-pulse-glow">
-            <Server className="h-5 w-5 text-primary-foreground" />
-          </div>
+          <img src={loftixLogo} alt="LoftixHost" className="h-9 w-9 rounded-lg" />
           <span className="font-heading text-xl font-bold">
             <span className="gradient-text">Loftix</span>Host
           </span>
