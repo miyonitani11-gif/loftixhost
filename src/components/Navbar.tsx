@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Server } from "lucide-react";
+import { Menu, X, Server } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -19,42 +19,58 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
+    <motion.nav
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl"
+    >
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-bg">
+        <Link to="/" className="flex items-center gap-2 hover-scale">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg gradient-bg animate-pulse-glow">
             <Server className="h-5 w-5 text-primary-foreground" />
           </div>
           <span className="font-heading text-xl font-bold">
-            <span className="gradient-text">Ender</span>Host
+            <span className="gradient-text">Loftix</span>Host
           </span>
         </Link>
 
         {/* Desktop */}
         <div className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <Link
+          {navLinks.map((link, i) => (
+            <motion.div
               key={link.href}
-              to={link.href}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                location.pathname === link.href
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + i * 0.05 }}
             >
-              {link.label}
-            </Link>
+              <Link
+                to={link.href}
+                className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  location.pathname === link.href
+                    ? "text-primary bg-primary/10"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                }`}
+              >
+                {link.label}
+              </Link>
+            </motion.div>
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="hidden items-center gap-3 md:flex"
+        >
           <Button variant="ghost" size="sm" asChild>
             <Link to="/login">Log In</Link>
           </Button>
           <Button variant="hero" size="sm" asChild>
             <Link to="/register">Get Started</Link>
           </Button>
-        </div>
+        </motion.div>
 
         {/* Mobile toggle */}
         <button
@@ -72,22 +88,29 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-b border-border/50 bg-background/95 backdrop-blur-xl md:hidden"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="border-b border-border/50 bg-background/95 backdrop-blur-xl md:hidden overflow-hidden"
           >
             <div className="container mx-auto flex flex-col gap-1 px-4 py-4">
-              {navLinks.map((link) => (
-                <Link
+              {navLinks.map((link, i) => (
+                <motion.div
                   key={link.href}
-                  to={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                    location.pathname === link.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    to={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                      location.pathname === link.href
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <div className="flex gap-3 mt-3 pt-3 border-t border-border/50">
                 <Button variant="ghost" size="sm" asChild className="flex-1">
@@ -101,7 +124,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
