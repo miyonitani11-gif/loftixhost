@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Server, MessageCircle, Youtube } from "lucide-react";
+import { MessageCircle, Youtube } from "lucide-react";
+import loftixLogo from "@/assets/loftix-logo.png";
 
 const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
 
