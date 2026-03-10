@@ -53,6 +53,7 @@ const PricingSection = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
         <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4">
@@ -67,20 +68,25 @@ const PricingSection = () => (
         {plans.map((plan, i) => (
           <motion.div
             key={plan.name}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className={`glass-card p-6 flex flex-col relative ${
-              plan.popular ? "glow-border" : ""
+            transition={{ delay: i * 0.1, duration: 0.5 }}
+            whileHover={{ y: -8 }}
+            className={`glass-card p-6 flex flex-col relative group transition-all duration-300 ${
+              plan.popular ? "glow-border" : "hover:glow-border"
             }`}
           >
             {plan.popular && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="gradient-bg text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="absolute -top-3 left-1/2 -translate-x-1/2"
+              >
+                <span className="gradient-bg text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full inline-flex items-center gap-1 shadow-[0_0_20px_hsl(265_85%_60%/0.4)]">
                   <Zap className="h-3 w-3" /> Most Popular
                 </span>
-              </div>
+              </motion.div>
             )}
 
             <h3 className="font-heading text-xl font-bold mb-1">{plan.name}</h3>
