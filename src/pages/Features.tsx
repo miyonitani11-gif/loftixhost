@@ -6,8 +6,8 @@ import { Server, Cpu, HardDrive, Shield, Globe, Zap } from "lucide-react";
 const detailedFeatures = [
   {
     icon: Cpu,
-    title: "AMD Ryzen 9 7950X",
-    desc: "Our servers run on the latest AMD Ryzen 9 processors, delivering industry-leading single-thread performance for smooth gameplay even with heavy modpacks.",
+    title: "AMD EPYC Processors",
+    desc: "Our servers run on AMD EPYC processors, delivering industry-leading performance for smooth gameplay even with heavy modpacks.",
   },
   {
     icon: HardDrive,
@@ -17,7 +17,7 @@ const detailedFeatures = [
   {
     icon: Shield,
     title: "Enterprise DDoS Protection",
-    desc: "Our 10Tbps DDoS mitigation network automatically detects and filters malicious traffic, keeping your server online and your players safe.",
+    desc: "Our DDoS mitigation network automatically detects and filters malicious traffic, keeping your server online and your players safe.",
   },
   {
     icon: Globe,
