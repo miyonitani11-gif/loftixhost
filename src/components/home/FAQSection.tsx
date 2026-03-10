@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -11,9 +10,9 @@ const faqs = [
   { q: "How fast is server deployment?", a: "Your server is automatically provisioned and online within 60 seconds of payment. No manual setup required." },
   { q: "What Minecraft versions do you support?", a: "We support all versions from 1.7.10 to the latest release, including Bedrock. We also support Forge, Fabric, Spigot, Paper, Purpur, and more." },
   { q: "Can I install modpacks?", a: "Yes! Our panel supports one-click modpack installation for popular packs, or you can upload your own custom modpack." },
-  { q: "Do you offer DDoS protection?", a: "All servers include enterprise-grade DDoS protection with up to 10Tbps mitigation capacity at no extra cost." },
-  { q: "Can I upgrade my plan later?", a: "Absolutely. You can upgrade or downgrade your plan at any time from the billing dashboard. Changes take effect immediately." },
-  { q: "What payment methods do you accept?", a: "We accept credit/debit cards via Stripe and PayPal. All payments are processed securely." },
+  { q: "Do you offer DDoS protection?", a: "All servers include enterprise-grade DDoS protection at no extra cost." },
+  { q: "Can I upgrade my plan later?", a: "Absolutely. You can upgrade or downgrade your plan at any time. Contact us on Discord and changes take effect immediately." },
+  { q: "How do I pay?", a: "All payments are processed through our Discord server. Join our Discord and contact our team to purchase a plan." },
 ];
 
 const FAQSection = () => (

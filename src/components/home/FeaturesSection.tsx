@@ -3,13 +3,13 @@ import { Server, Shield, Zap, Globe, Cpu, HardDrive, Headphones, RotateCcw } fro
 
 const features = [
   { icon: Zap, title: "Instant Setup", desc: "Your server is online within 60 seconds of purchase. No waiting, no manual setup." },
-  { icon: Shield, title: "DDoS Protection", desc: "Enterprise-grade 10Tbps DDoS mitigation keeps your server safe from attacks." },
-  { icon: Cpu, title: "Ryzen 9 CPUs", desc: "AMD Ryzen 9 7950X processors for maximum single-thread performance." },
+  { icon: Shield, title: "DDoS Protection", desc: "Enterprise-grade DDoS mitigation keeps your server safe from attacks." },
+  { icon: Cpu, title: "AMD EPYC CPUs", desc: "AMD EPYC processors for maximum performance and reliability." },
   { icon: HardDrive, title: "NVMe Storage", desc: "Blazing fast NVMe SSDs ensure rapid world loading and chunk generation." },
   { icon: Globe, title: "Global Network", desc: "12+ locations worldwide with low-latency routing for the best player experience." },
   { icon: Server, title: "Custom Panel", desc: "Full-featured game panel with console, file manager, backups, and more." },
   { icon: RotateCcw, title: "Auto Backups", desc: "Automatic daily backups with one-click restore to keep your data safe." },
-  { icon: Headphones, title: "24/7 Support", desc: "Expert support team available round the clock via tickets and live chat." },
+  { icon: Headphones, title: "24/7 Support", desc: "Expert support team available round the clock via Discord and tickets." },
 ];
 
 const FeaturesSection = () => (

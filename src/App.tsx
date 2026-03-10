@@ -10,8 +10,6 @@ import Locations from "./pages/Locations.tsx";
 import Status from "./pages/Status.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
-import Login from "./pages/Login.tsx";
-import Register from "./pages/Register.tsx";
 import Knowledgebase from "./pages/Knowledgebase.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -31,8 +29,6 @@ const App = () => (
           <Route path="/status" element={<Status />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
           <Route path="/knowledgebase" element={<Knowledgebase />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

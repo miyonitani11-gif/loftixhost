@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
+
+const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
 
 const CTASection = () => (
   <section className="py-24 relative overflow-hidden">
     <div className="absolute inset-0 hero-glow pointer-events-none rotate-180" />
 
-    {/* Floating orbs */}
     <motion.div
       className="absolute -left-20 top-1/2 w-40 h-40 rounded-full bg-primary/10 blur-[80px]"
       animate={{ x: [0, 20, 0], y: [0, -20, 0] }}
@@ -41,12 +41,12 @@ const CTASection = () => (
           Ready to Launch Your Server?
         </h2>
         <p className="text-muted-foreground text-lg mb-8 max-w-xl mx-auto">
-          Join thousands of server owners who trust LoftixHost. Deploy in under 60 seconds.
+          Join our Discord community and get your server deployed in minutes.
         </p>
         <Button variant="hero" size="lg" asChild>
-          <Link to="/pricing">
-            Get Started Now <ArrowRight className="h-4 w-4" />
-          </Link>
+          <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">
+            Buy Through Discord <ArrowRight className="h-4 w-4" />
+          </a>
         </Button>
       </motion.div>
     </div>

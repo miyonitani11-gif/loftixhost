@@ -4,6 +4,7 @@ import TrustedBySection from "@/components/home/TrustedBySection";
 import FeaturesSection from "@/components/home/FeaturesSection";
 import HowItWorksSection from "@/components/home/HowItWorksSection";
 import ServerTypesSection from "@/components/home/ServerTypesSection";
+import ControlPanelSection from "@/components/home/ControlPanelSection";
 import GamePanelSection from "@/components/home/GamePanelSection";
 import PricingSection from "@/components/home/PricingSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
@@ -17,6 +18,7 @@ const Index = () => (
     <FeaturesSection />
     <HowItWorksSection />
     <ServerTypesSection />
+    <ControlPanelSection />
     <GamePanelSection />
     <PricingSection />
     <TestimonialsSection />
