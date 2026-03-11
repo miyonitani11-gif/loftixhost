@@ -22,6 +22,7 @@ const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   return (
     <motion.nav
