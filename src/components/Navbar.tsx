@@ -125,9 +125,20 @@ const Navbar = () => {
                 </motion.div>
               ))}
               <div className="flex gap-3 mt-3 pt-3 border-t border-border/50">
-                <Button variant="hero" size="sm" asChild className="flex-1">
-                  <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <Button variant="heroOutline" size="sm" asChild className="flex-1">
+                  <Link to={user ? "/tickets" : "/auth"} onClick={() => setMobileOpen(false)}>
+                    <Ticket className="h-4 w-4 mr-1" /> Tickets
+                  </Link>
                 </Button>
+                {user ? (
+                  <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
+                    <LogOut className="h-4 w-4 mr-1" /> Logout
+                  </Button>
+                ) : (
+                  <Button variant="hero" size="sm" asChild className="flex-1">
+                    <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+                  </Button>
+                )}
               </div>
             </div>
           </motion.div>
