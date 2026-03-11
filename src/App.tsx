@@ -14,6 +14,10 @@ import Partnership from "./pages/Partnership.tsx";
 import Policies from "./pages/Policies.tsx";
 import Knowledgebase from "./pages/Knowledgebase.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Auth from "./pages/Auth.tsx";
+import Tickets from "./pages/Tickets.tsx";
+import NewTicket from "./pages/NewTicket.tsx";
+import TicketDetail from "./pages/TicketDetail.tsx";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +38,10 @@ const App = () => (
           <Route path="/partnership" element={<Partnership />} />
           <Route path="/policies" element={<Policies />} />
           <Route path="/knowledgebase" element={<Knowledgebase />} />
+          <Route path="/auth" element={<Auth />} />
+          <Route path="/tickets" element={<Tickets />} />
+          <Route path="/tickets/new" element={<NewTicket />} />
+          <Route path="/tickets/:id" element={<TicketDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

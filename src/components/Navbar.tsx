@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Ticket, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 import loftixLogo from "@/assets/loftix-logo.png";
 
 const navLinks = [
@@ -21,6 +22,7 @@ const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   return (
     <motion.nav
@@ -66,9 +68,20 @@ const Navbar = () => {
           transition={{ delay: 0.5 }}
           className="hidden items-center gap-3 md:flex"
         >
-          <Button variant="hero" size="sm" asChild>
-            <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+          <Button variant="heroOutline" size="sm" asChild>
+            <Link to={user ? "/tickets" : "/auth"}>
+              <Ticket className="h-4 w-4 mr-1" /> Tickets
+            </Link>
           </Button>
+          {user ? (
+            <Button variant="ghost" size="sm" onClick={signOut}>
+              <LogOut className="h-4 w-4 mr-1" /> Logout
+            </Button>
+          ) : (
+            <Button variant="hero" size="sm" asChild>
+              <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+            </Button>
+          )}
         </motion.div>
 
         {/* Mobile toggle */}
@@ -112,9 +125,20 @@ const Navbar = () => {
                 </motion.div>
               ))}
               <div className="flex gap-3 mt-3 pt-3 border-t border-border/50">
-                <Button variant="hero" size="sm" asChild className="flex-1">
-                  <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <Button variant="heroOutline" size="sm" asChild className="flex-1">
+                  <Link to={user ? "/tickets" : "/auth"} onClick={() => setMobileOpen(false)}>
+                    <Ticket className="h-4 w-4 mr-1" /> Tickets
+                  </Link>
                 </Button>
+                {user ? (
+                  <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
+                    <LogOut className="h-4 w-4 mr-1" /> Logout
+                  </Button>
+                ) : (
+                  <Button variant="hero" size="sm" asChild className="flex-1">
+                    <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+                  </Button>
+                )}
               </div>
             </div>
           </motion.div>
