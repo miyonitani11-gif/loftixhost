@@ -10,6 +10,8 @@ import Locations from "./pages/Locations.tsx";
 import Status from "./pages/Status.tsx";
 import About from "./pages/About.tsx";
 import Contact from "./pages/Contact.tsx";
+import Partnership from "./pages/Partnership.tsx";
+import Policies from "./pages/Policies.tsx";
 import Knowledgebase from "./pages/Knowledgebase.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
