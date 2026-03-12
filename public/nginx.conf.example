@@ -1,0 +1,4 @@
+# Nginx config for SPA routing - add this inside your server block
+location / {
+  try_files $uri $uri/ /index.html;
+}
