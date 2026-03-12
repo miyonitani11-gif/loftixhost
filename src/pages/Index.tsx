@@ -15,15 +15,23 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import PartnershipBanner from "@/components/home/PartnershipBanner";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
+import TeamSection from "@/components/home/TeamSection";
+import BlogSection from "@/components/home/BlogSection";
+import LiveCounterSection from "@/components/home/LiveCounterSection";
+import ModpackSection from "@/components/home/ModpackSection";
+import SecuritySection from "@/components/home/SecuritySection";
 
 const Index = () => (
   <Layout>
     <HeroSection />
     <TrustedBySection />
+    <LiveCounterSection />
     <StatsSection />
     <FeaturesSection />
+    <SecuritySection />
     <WhyChooseSection />
     <HowItWorksSection />
+    <ModpackSection />
     <ServerTypesSection />
     <ControlPanelSection />
     <GamePanelSection />
@@ -31,6 +39,8 @@ const Index = () => (
     <ComparisonSection />
     <PricingSection />
     <TestimonialsSection />
+    <TeamSection />
+    <BlogSection />
     <PartnershipBanner />
     <FAQSection />
     <CTASection />

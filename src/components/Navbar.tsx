@@ -138,9 +138,16 @@ const Navbar = () => {
                   </Link>
                 </Button>
                 {user ? (
-                  <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
-                    <LogOut className="h-4 w-4 mr-1" /> Logout
-                  </Button>
+                  <>
+                    <Button variant="ghost" size="sm" asChild className="flex-1">
+                      <Link to="/account" onClick={() => setMobileOpen(false)}>
+                        <User className="h-4 w-4 mr-1" /> Account
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
+                      <LogOut className="h-4 w-4 mr-1" /> Logout
+                    </Button>
+                  </>
                 ) : (
                   <Button variant="hero" size="sm" asChild className="flex-1">
                     <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>

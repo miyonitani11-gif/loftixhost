@@ -18,6 +18,8 @@ import Auth from "./pages/Auth.tsx";
 import Tickets from "./pages/Tickets.tsx";
 import NewTicket from "./pages/NewTicket.tsx";
 import TicketDetail from "./pages/TicketDetail.tsx";
+import ResetPassword from "./pages/ResetPassword.tsx";
+import MyAccount from "./pages/MyAccount.tsx";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/policies" element={<Policies />} />
           <Route path="/knowledgebase" element={<Knowledgebase />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/account" element={<MyAccount />} />
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/tickets/new" element={<NewTicket />} />
           <Route path="/tickets/:id" element={<TicketDetail />} />
