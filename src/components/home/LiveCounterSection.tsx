@@ -61,7 +61,7 @@ const LiveCounterSection = () => {
               </div>
               <div className="font-heading text-3xl md:text-4xl font-bold mb-1 tabular-nums">{item.value}</div>
               <div className="text-sm text-muted-foreground">{item.label}</div>
-              {item.pulse && <div className="mt-2 h-1 w-12 mx-auto rounded-full bg-green-500/50 animate-pulse" />}
+              {item.pulse && <div className="mt-2 h-1 w-12 mx-auto rounded-full bg-emerald-500/50 animate-pulse" />}
             </motion.div>
           ))}
         </div>
