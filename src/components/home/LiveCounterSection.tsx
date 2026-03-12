@@ -36,10 +36,10 @@ const LiveCounterSection = () => {
         >
           <div className="flex items-center justify-center gap-2 mb-4">
             <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
             </span>
-            <span className="text-sm font-medium text-green-400 uppercase tracking-wider">Live Stats</span>
+            <span className="text-sm font-medium text-emerald-400 uppercase tracking-wider">Live Stats</span>
           </div>
           <h2 className="font-heading text-3xl md:text-4xl font-bold">
             Real-Time <span className="gradient-text">Network Status</span>
