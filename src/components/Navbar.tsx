@@ -74,9 +74,16 @@ const Navbar = () => {
             </Link>
           </Button>
           {user ? (
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              <LogOut className="h-4 w-4 mr-1" /> Logout
-            </Button>
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/account">
+                  <User className="h-4 w-4 mr-1" /> Account
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" onClick={signOut}>
+                <LogOut className="h-4 w-4 mr-1" /> Logout
+              </Button>
+            </>
           ) : (
             <Button variant="hero" size="sm" asChild>
               <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
