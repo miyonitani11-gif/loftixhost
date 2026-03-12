@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Ticket, LogOut } from "lucide-react";
+import { Menu, X, Ticket, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import loftixLogo from "@/assets/loftix-logo.png";
@@ -74,9 +74,16 @@ const Navbar = () => {
             </Link>
           </Button>
           {user ? (
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              <LogOut className="h-4 w-4 mr-1" /> Logout
-            </Button>
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/account">
+                  <User className="h-4 w-4 mr-1" /> Account
+                </Link>
+              </Button>
+              <Button variant="ghost" size="sm" onClick={signOut}>
+                <LogOut className="h-4 w-4 mr-1" /> Logout
+              </Button>
+            </>
           ) : (
             <Button variant="hero" size="sm" asChild>
               <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
@@ -131,9 +138,16 @@ const Navbar = () => {
                   </Link>
                 </Button>
                 {user ? (
-                  <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
-                    <LogOut className="h-4 w-4 mr-1" /> Logout
-                  </Button>
+                  <>
+                    <Button variant="ghost" size="sm" asChild className="flex-1">
+                      <Link to="/account" onClick={() => setMobileOpen(false)}>
+                        <User className="h-4 w-4 mr-1" /> Account
+                      </Link>
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
+                      <LogOut className="h-4 w-4 mr-1" /> Logout
+                    </Button>
+                  </>
                 ) : (
                   <Button variant="hero" size="sm" asChild className="flex-1">
                     <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
