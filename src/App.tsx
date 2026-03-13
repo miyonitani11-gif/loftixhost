@@ -20,6 +20,8 @@ import NewTicket from "./pages/NewTicket.tsx";
 import TicketDetail from "./pages/TicketDetail.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import MyAccount from "./pages/MyAccount.tsx";
+import AdminPanel from "./pages/AdminPanel.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,8 @@ const App = () => (
           <Route path="/tickets" element={<Tickets />} />
           <Route path="/tickets/new" element={<NewTicket />} />
           <Route path="/tickets/:id" element={<TicketDetail />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
