@@ -39,7 +39,7 @@ const Index = () => (
     <ComparisonSection />
     <PricingSection />
     <TestimonialsSection />
-    <TeamSection />
+    
     <BlogSection />
     <PartnershipBanner />
     <FAQSection />

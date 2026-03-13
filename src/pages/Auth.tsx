@@ -48,7 +48,11 @@ const Auth = () => {
         toast({ title: "Welcome back!", description: "You've been logged in successfully." });
         navigate("/");
       } else {
-        const { error } = await supabase.auth.signUp({ email, password });
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { emailRedirectTo: `${window.location.origin}/` },
+        });
         if (error) throw error;
         toast({ title: "Account created!", description: "Please check your email to verify your account." });
       }
