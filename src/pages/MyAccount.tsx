@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { User, Lock, Mail, Shield, Clock, Loader2, Monitor } from "lucide-react";
+import { User, Lock, Mail, Shield, Clock, Loader2, Monitor, Pencil } from "lucide-react";
 
 const MyAccount = () => {
   const { user, loading: authLoading } = useAuth();
@@ -20,6 +20,8 @@ const MyAccount = () => {
   const [updating, setUpdating] = useState(false);
   const [loginActivity, setLoginActivity] = useState<any[]>([]);
   const [loadingActivity, setLoadingActivity] = useState(true);
+  const [displayName, setDisplayName] = useState("");
+  const [savingName, setSavingName] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/auth");
@@ -27,6 +29,8 @@ const MyAccount = () => {
 
   useEffect(() => {
     if (!user) return;
+
+    // Fetch login activity
     const fetchActivity = async () => {
       const { data } = await supabase
         .from("login_activity" as any)
@@ -37,8 +41,40 @@ const MyAccount = () => {
       if (data) setLoginActivity(data as any[]);
       setLoadingActivity(false);
     };
+
+    // Fetch or create profile
+    const fetchProfile = async () => {
+      const { data, error } = await supabase
+        .from("profiles" as any)
+        .select("display_name")
+        .eq("user_id", user.id)
+        .single();
+      if (error && error.code === "PGRST116") {
+        // No profile exists, create one
+        await supabase.from("profiles" as any).insert({ user_id: user.id, display_name: "" } as any);
+      } else if (data) {
+        setDisplayName((data as any).display_name || "");
+      }
+    };
+
     fetchActivity();
+    fetchProfile();
   }, [user]);
+
+  const handleSaveDisplayName = async () => {
+    if (!user) return;
+    setSavingName(true);
+    const { error } = await supabase
+      .from("profiles" as any)
+      .update({ display_name: displayName } as any)
+      .eq("user_id", user.id);
+    if (error) {
+      toast({ title: "Error", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Saved!", description: "Display name updated." });
+    }
+    setSavingName(false);
+  };
 
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,6 +140,30 @@ const MyAccount = () => {
                     <div className="font-medium">{user?.created_at ? new Date(user.created_at).toLocaleDateString() : "N/A"}</div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Display Name */}
+            <div className="glass-card glow-border p-6 mb-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Pencil className="h-5 w-5" />
+                </div>
+                <div>
+                  <h2 className="font-heading font-semibold text-lg">Display Name</h2>
+                  <p className="text-sm text-muted-foreground">Set your public display name</p>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Input
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  placeholder="Enter display name"
+                  className="bg-secondary/50 border-border"
+                />
+                <Button variant="hero" onClick={handleSaveDisplayName} disabled={savingName}>
+                  {savingName ? "Saving..." : "Save"}
+                </Button>
               </div>
             </div>
 
