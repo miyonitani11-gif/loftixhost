@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          author_email: string
+          content: string
+          created_at: string
+          excerpt: string
+          id: string
+          published: boolean
+          slug: string
+          tag: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_email: string
+          content?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          published?: boolean
+          slug: string
+          tag?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_email?: string
+          content?: string
+          created_at?: string
+          excerpt?: string
+          id?: string
+          published?: boolean
+          slug?: string
+          tag?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       login_activity: {
         Row: {
           id: string
@@ -37,6 +76,51 @@ export type Database = {
           logged_in_at?: string
           user_agent?: string | null
           user_email?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      network_status: {
+        Row: {
+          id: string
+          service_name: string
+          status: string
+          updated_at: string
+          uptime: string
+        }
+        Insert: {
+          id?: string
+          service_name: string
+          status?: string
+          updated_at?: string
+          uptime?: string
+        }
+        Update: {
+          id?: string
+          service_name?: string
+          status?: string
+          updated_at?: string
+          uptime?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
           user_id?: string
         }
         Relationships: []
