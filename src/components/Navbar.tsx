@@ -6,48 +6,80 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { isAdmin } from "@/lib/admin";
 import SearchDialog from "@/components/SearchDialog";
+import { supabase } from "@/integrations/supabase/client";
 import loftixLogo from "@/assets/loftix-logo.png";
 
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Features", href: "/features" },
-  { label: "Locations", href: "/locations" },
-  { label: "Partnership", href: "/partnership" },
-  { label: "Status", href: "/status" },
-  { label: "Policies", href: "/policies" },
-  { label: "Contact", href: "/contact" },
-];
+interface NavItem {
+  id: string;
+  label: string;
+  href: string;
+  is_external: boolean;
+  enabled: boolean;
+  sort_order: number;
+}
 
-const DISCORD_LINK = "https://discord.gg/h9kYJGDMTC";
+interface SiteSettings {
+  site_name: string;
+  discord_link: string;
+  announcement_bar_text: string;
+  announcement_bar_enabled: boolean;
+}
+
+const fallbackLinks = [
+  { label: "Home", href: "/" }, { label: "Pricing", href: "/pricing" },
+  { label: "Features", href: "/features" }, { label: "Locations", href: "/locations" },
+  { label: "Partnership", href: "/partnership" }, { label: "Status", href: "/status" },
+  { label: "Policies", href: "/policies" }, { label: "Contact", href: "/contact" },
+];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [navLinks, setNavLinks] = useState<{ label: string; href: string; is_external?: boolean }[]>(fallbackLinks);
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
   const location = useLocation();
   const { user, signOut } = useAuth();
   const admin = isAdmin(user?.email ?? undefined);
 
-  // Keyboard shortcut for search
+  useEffect(() => {
+    const fetchNav = async () => {
+      const { data } = await supabase.from("nav_items").select("*").eq("enabled", true).order("sort_order");
+      if (data && data.length > 0) setNavLinks(data as any);
+    };
+    const fetchSettings = async () => {
+      const { data } = await supabase.from("site_settings").select("site_name, discord_link, announcement_bar_text, announcement_bar_enabled").limit(1).single();
+      if (data) setSettings(data as any);
+    };
+    fetchNav();
+    fetchSettings();
+  }, []);
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen(true);
-      }
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); setSearchOpen(true); }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  const discordLink = settings?.discord_link || "https://discord.gg/h9kYJGDMTC";
+
   return (
     <>
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+
+      {/* Announcement bar */}
+      {settings?.announcement_bar_enabled && settings.announcement_bar_text && (
+        <div className="bg-primary text-primary-foreground text-center text-sm py-1.5 px-4 font-medium fixed top-0 left-0 right-0 z-[60]">
+          {settings.announcement_bar_text}
+        </div>
+      )}
+
       <motion.nav
         initial={{ y: -80 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl"
+        className={`fixed left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl ${settings?.announcement_bar_enabled ? "top-8" : "top-0"}`}
       >
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link to="/" className="flex items-center gap-2 hover-scale">
@@ -57,35 +89,23 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop */}
           <div className="hidden items-center gap-1 md:flex">
             {navLinks.map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.05 }}
-              >
-                <Link
-                  to={link.href}
-                  className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
-                    location.pathname === link.href
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+              <motion.div key={link.href + i} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 + i * 0.05 }}>
+                {(link as any).is_external ? (
+                  <a href={link.href} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-200">
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link to={link.href} className={`px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ${location.pathname === link.href ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"}`}>
+                    {link.label}
+                  </Link>
+                )}
               </motion.div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="hidden items-center gap-2 md:flex"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="hidden items-center gap-2 md:flex">
             <Button variant="ghost" size="sm" onClick={() => setSearchOpen(true)} className="gap-1.5 text-muted-foreground">
               <Search className="h-4 w-4" />
               <kbd className="hidden lg:inline-flex h-5 select-none items-center gap-1 rounded border border-border/50 bg-secondary/50 px-1.5 font-mono text-[10px] font-medium text-muted-foreground">⌘K</kbd>
@@ -96,16 +116,12 @@ const Navbar = () => {
               </Button>
             )}
             <Button variant="heroOutline" size="sm" asChild>
-              <Link to={user ? "/tickets" : "/auth"}>
-                <Ticket className="h-4 w-4 mr-1" /> Tickets
-              </Link>
+              <Link to={user ? "/tickets" : "/auth"}><Ticket className="h-4 w-4 mr-1" /> Tickets</Link>
             </Button>
             {user ? (
               <>
                 <Button variant="ghost" size="sm" asChild>
-                  <Link to="/account">
-                    <User className="h-4 w-4 mr-1" /> Account
-                  </Link>
+                  <Link to="/account"><User className="h-4 w-4 mr-1" /> Account</Link>
                 </Button>
                 <Button variant="ghost" size="sm" onClick={signOut}>
                   <LogOut className="h-4 w-4 mr-1" /> Logout
@@ -113,51 +129,30 @@ const Navbar = () => {
               </>
             ) : (
               <Button variant="hero" size="sm" asChild>
-                <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <a href={discordLink} target="_blank" rel="noopener noreferrer">Join Discord</a>
               </Button>
             )}
           </motion.div>
 
-          {/* Mobile toggle */}
           <div className="flex items-center gap-2 md:hidden">
-            <Button variant="ghost" size="sm" onClick={() => setSearchOpen(true)}>
-              <Search className="h-5 w-5" />
-            </Button>
+            <Button variant="ghost" size="sm" onClick={() => setSearchOpen(true)}><Search className="h-5 w-5" /></Button>
             <button className="text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="border-b border-border/50 bg-background/95 backdrop-blur-xl md:hidden overflow-hidden"
-            >
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="border-b border-border/50 bg-background/95 backdrop-blur-xl md:hidden overflow-hidden">
               <div className="container mx-auto flex flex-col gap-1 px-4 py-4">
                 {navLinks.map((link, i) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <Link
-                      to={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                        location.pathname === link.href
-                          ? "text-primary bg-primary/10"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
+                  <motion.div key={link.href + i} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
+                    {(link as any).is_external ? (
+                      <a href={link.href} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="block px-3 py-2 text-sm font-medium rounded-md text-muted-foreground hover:text-foreground">{link.label}</a>
+                    ) : (
+                      <Link to={link.href} onClick={() => setMobileOpen(false)} className={`block px-3 py-2 text-sm font-medium rounded-md transition-colors ${location.pathname === link.href ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground"}`}>{link.label}</Link>
+                    )}
                   </motion.div>
                 ))}
                 {admin && (
@@ -167,16 +162,12 @@ const Navbar = () => {
                 )}
                 <div className="flex gap-3 mt-3 pt-3 border-t border-border/50">
                   <Button variant="heroOutline" size="sm" asChild className="flex-1">
-                    <Link to={user ? "/tickets" : "/auth"} onClick={() => setMobileOpen(false)}>
-                      <Ticket className="h-4 w-4 mr-1" /> Tickets
-                    </Link>
+                    <Link to={user ? "/tickets" : "/auth"} onClick={() => setMobileOpen(false)}><Ticket className="h-4 w-4 mr-1" /> Tickets</Link>
                   </Button>
                   {user ? (
                     <>
                       <Button variant="ghost" size="sm" asChild className="flex-1">
-                        <Link to="/account" onClick={() => setMobileOpen(false)}>
-                          <User className="h-4 w-4 mr-1" /> Account
-                        </Link>
+                        <Link to="/account" onClick={() => setMobileOpen(false)}><User className="h-4 w-4 mr-1" /> Account</Link>
                       </Button>
                       <Button variant="ghost" size="sm" onClick={() => { signOut(); setMobileOpen(false); }} className="flex-1">
                         <LogOut className="h-4 w-4 mr-1" /> Logout
@@ -184,7 +175,7 @@ const Navbar = () => {
                     </>
                   ) : (
                     <Button variant="hero" size="sm" asChild className="flex-1">
-                      <a href={DISCORD_LINK} target="_blank" rel="noopener noreferrer">Join Discord</a>
+                      <a href={discordLink} target="_blank" rel="noopener noreferrer">Join Discord</a>
                     </Button>
                   )}
                 </div>
