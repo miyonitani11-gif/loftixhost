@@ -53,6 +53,117 @@ export type Database = {
         }
         Relationships: []
       }
+      footer_links: {
+        Row: {
+          enabled: boolean
+          href: string
+          id: string
+          is_external: boolean
+          label: string
+          section: string
+          sort_order: number
+        }
+        Insert: {
+          enabled?: boolean
+          href: string
+          id?: string
+          is_external?: boolean
+          label: string
+          section?: string
+          sort_order?: number
+        }
+        Update: {
+          enabled?: boolean
+          href?: string
+          id?: string
+          is_external?: boolean
+          label?: string
+          section?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
+      homepage_sections: {
+        Row: {
+          enabled: boolean
+          id: string
+          section_key: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          enabled?: boolean
+          id?: string
+          section_key: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          enabled?: boolean
+          id?: string
+          section_key?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      hosting_plans: {
+        Row: {
+          backups: string
+          category: string
+          cpu: string
+          created_at: string
+          enabled: boolean
+          features: string[]
+          id: string
+          name: string
+          original_price: number | null
+          popular: boolean
+          price: number
+          purchase_url: string
+          ram: string
+          sort_order: number
+          storage: string
+          updated_at: string
+        }
+        Insert: {
+          backups?: string
+          category?: string
+          cpu?: string
+          created_at?: string
+          enabled?: boolean
+          features?: string[]
+          id?: string
+          name: string
+          original_price?: number | null
+          popular?: boolean
+          price: number
+          purchase_url?: string
+          ram?: string
+          sort_order?: number
+          storage?: string
+          updated_at?: string
+        }
+        Update: {
+          backups?: string
+          category?: string
+          cpu?: string
+          created_at?: string
+          enabled?: boolean
+          features?: string[]
+          id?: string
+          name?: string
+          original_price?: number | null
+          popular?: boolean
+          price?: number
+          purchase_url?: string
+          ram?: string
+          sort_order?: number
+          storage?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       login_activity: {
         Row: {
           id: string
@@ -79,6 +190,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      nav_items: {
+        Row: {
+          created_at: string
+          enabled: boolean
+          href: string
+          id: string
+          is_external: boolean
+          label: string
+          parent_id: string | null
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          enabled?: boolean
+          href: string
+          id?: string
+          is_external?: boolean
+          label: string
+          parent_id?: string | null
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          enabled?: boolean
+          href?: string
+          id?: string
+          is_external?: boolean
+          label?: string
+          parent_id?: string | null
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nav_items_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "nav_items"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       network_status: {
         Row: {
@@ -122,6 +274,51 @@ export type Database = {
           display_name?: string | null
           id?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          announcement_bar_enabled: boolean
+          announcement_bar_text: string
+          copyright_text: string
+          discord_link: string
+          footer_tagline: string
+          id: string
+          logo_url: string
+          meta_description: string
+          meta_title: string
+          site_description: string
+          site_name: string
+          updated_at: string
+        }
+        Insert: {
+          announcement_bar_enabled?: boolean
+          announcement_bar_text?: string
+          copyright_text?: string
+          discord_link?: string
+          footer_tagline?: string
+          id?: string
+          logo_url?: string
+          meta_description?: string
+          meta_title?: string
+          site_description?: string
+          site_name?: string
+          updated_at?: string
+        }
+        Update: {
+          announcement_bar_enabled?: boolean
+          announcement_bar_text?: string
+          copyright_text?: string
+          discord_link?: string
+          footer_tagline?: string
+          id?: string
+          logo_url?: string
+          meta_description?: string
+          meta_title?: string
+          site_description?: string
+          site_name?: string
+          updated_at?: string
         }
         Relationships: []
       }
