@@ -277,48 +277,207 @@ export type Database = {
         }
         Relationships: []
       }
-      site_settings: {
+      redirections: {
         Row: {
-          announcement_bar_enabled: boolean
-          announcement_bar_text: string
-          copyright_text: string
-          discord_link: string
-          footer_tagline: string
+          created_at: string
+          enabled: boolean
+          from_path: string
           id: string
-          logo_url: string
-          meta_description: string
-          meta_title: string
-          site_description: string
-          site_name: string
-          updated_at: string
+          permanent: boolean
+          to_path: string
         }
         Insert: {
-          announcement_bar_enabled?: boolean
-          announcement_bar_text?: string
-          copyright_text?: string
-          discord_link?: string
-          footer_tagline?: string
+          created_at?: string
+          enabled?: boolean
+          from_path: string
           id?: string
-          logo_url?: string
-          meta_description?: string
-          meta_title?: string
-          site_description?: string
-          site_name?: string
-          updated_at?: string
+          permanent?: boolean
+          to_path: string
         }
         Update: {
+          created_at?: string
+          enabled?: boolean
+          from_path?: string
+          id?: string
+          permanent?: boolean
+          to_path?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          accent_color: string
+          announcement_bar_enabled: boolean
+          announcement_bar_text: string
+          auth_redirect_url: string
+          blog_enabled: boolean
+          border_radius: string
+          contact_address: string
+          contact_email: string
+          contact_phone: string
+          copyright_text: string
+          currency_symbol: string
+          custom_css: string
+          custom_head_scripts: string
+          default_plan_category: string
+          default_ticket_priority: string
+          discord_link: string
+          email_confirmation_redirect: string
+          enable_live_chat: boolean
+          favicon_url: string
+          features_page_subtitle: string
+          features_page_title: string
+          font_family: string
+          footer_tagline: string
+          github_link: string
+          google_analytics_id: string
+          hero_cta_link: string
+          hero_cta_text: string
+          hero_image_url: string
+          hero_subtitle: string
+          hero_title: string
+          id: string
+          instagram_link: string
+          knowledgebase_enabled: boolean
+          live_chat_widget_id: string
+          login_page_message: string
+          logo_url: string
+          maintenance_message: string
+          maintenance_mode: boolean
+          max_tickets_per_user: number
+          meta_description: string
+          meta_title: string
+          og_image_url: string
+          pricing_page_subtitle: string
+          pricing_page_title: string
+          primary_color: string
+          registration_enabled: boolean
+          secondary_color: string
+          sender_name: string
+          show_original_prices: boolean
+          site_description: string
+          site_name: string
+          status_page_enabled: boolean
+          tiktok_link: string
+          twitter_link: string
+          updated_at: string
+          youtube_link: string
+        }
+        Insert: {
+          accent_color?: string
           announcement_bar_enabled?: boolean
           announcement_bar_text?: string
+          auth_redirect_url?: string
+          blog_enabled?: boolean
+          border_radius?: string
+          contact_address?: string
+          contact_email?: string
+          contact_phone?: string
           copyright_text?: string
+          currency_symbol?: string
+          custom_css?: string
+          custom_head_scripts?: string
+          default_plan_category?: string
+          default_ticket_priority?: string
           discord_link?: string
+          email_confirmation_redirect?: string
+          enable_live_chat?: boolean
+          favicon_url?: string
+          features_page_subtitle?: string
+          features_page_title?: string
+          font_family?: string
           footer_tagline?: string
+          github_link?: string
+          google_analytics_id?: string
+          hero_cta_link?: string
+          hero_cta_text?: string
+          hero_image_url?: string
+          hero_subtitle?: string
+          hero_title?: string
           id?: string
+          instagram_link?: string
+          knowledgebase_enabled?: boolean
+          live_chat_widget_id?: string
+          login_page_message?: string
           logo_url?: string
+          maintenance_message?: string
+          maintenance_mode?: boolean
+          max_tickets_per_user?: number
           meta_description?: string
           meta_title?: string
+          og_image_url?: string
+          pricing_page_subtitle?: string
+          pricing_page_title?: string
+          primary_color?: string
+          registration_enabled?: boolean
+          secondary_color?: string
+          sender_name?: string
+          show_original_prices?: boolean
           site_description?: string
           site_name?: string
+          status_page_enabled?: boolean
+          tiktok_link?: string
+          twitter_link?: string
           updated_at?: string
+          youtube_link?: string
+        }
+        Update: {
+          accent_color?: string
+          announcement_bar_enabled?: boolean
+          announcement_bar_text?: string
+          auth_redirect_url?: string
+          blog_enabled?: boolean
+          border_radius?: string
+          contact_address?: string
+          contact_email?: string
+          contact_phone?: string
+          copyright_text?: string
+          currency_symbol?: string
+          custom_css?: string
+          custom_head_scripts?: string
+          default_plan_category?: string
+          default_ticket_priority?: string
+          discord_link?: string
+          email_confirmation_redirect?: string
+          enable_live_chat?: boolean
+          favicon_url?: string
+          features_page_subtitle?: string
+          features_page_title?: string
+          font_family?: string
+          footer_tagline?: string
+          github_link?: string
+          google_analytics_id?: string
+          hero_cta_link?: string
+          hero_cta_text?: string
+          hero_image_url?: string
+          hero_subtitle?: string
+          hero_title?: string
+          id?: string
+          instagram_link?: string
+          knowledgebase_enabled?: boolean
+          live_chat_widget_id?: string
+          login_page_message?: string
+          logo_url?: string
+          maintenance_message?: string
+          maintenance_mode?: boolean
+          max_tickets_per_user?: number
+          meta_description?: string
+          meta_title?: string
+          og_image_url?: string
+          pricing_page_subtitle?: string
+          pricing_page_title?: string
+          primary_color?: string
+          registration_enabled?: boolean
+          secondary_color?: string
+          sender_name?: string
+          show_original_prices?: boolean
+          site_description?: string
+          site_name?: string
+          status_page_enabled?: boolean
+          tiktok_link?: string
+          twitter_link?: string
+          updated_at?: string
+          youtube_link?: string
         }
         Relationships: []
       }
