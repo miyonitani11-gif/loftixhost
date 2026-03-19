@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { isAdmin } from "@/lib/admin";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, LayoutDashboard, Users, Newspaper, Wifi, Ticket, Settings, CreditCard, Navigation, PanelBottom, Layers } from "lucide-react";
+import { Loader2, LayoutDashboard, Users, Newspaper, Wifi, Ticket, Settings, CreditCard, Navigation, PanelBottom, Layers, ArrowRightLeft } from "lucide-react";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminUsers from "@/components/admin/AdminUsers";
 import AdminBlog from "@/components/admin/AdminBlog";
@@ -16,6 +16,7 @@ import AdminPlans from "@/components/admin/AdminPlans";
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import AdminFooter from "@/components/admin/AdminFooter";
 import AdminSections from "@/components/admin/AdminSections";
+import AdminRedirections from "@/components/admin/AdminRedirections";
 
 const AdminPanel = () => {
   const { user, loading: authLoading } = useAuth();
