@@ -59,6 +59,7 @@ const AdminPanel = () => {
                 <TabsTrigger value="navbar" className="gap-2"><Navigation className="h-4 w-4" /> Navbar</TabsTrigger>
                 <TabsTrigger value="footer" className="gap-2"><PanelBottom className="h-4 w-4" /> Footer</TabsTrigger>
                 <TabsTrigger value="sections" className="gap-2"><Layers className="h-4 w-4" /> Sections</TabsTrigger>
+                <TabsTrigger value="redirects" className="gap-2"><ArrowRightLeft className="h-4 w-4" /> Redirects</TabsTrigger>
                 <TabsTrigger value="settings" className="gap-2"><Settings className="h-4 w-4" /> Settings</TabsTrigger>
               </TabsList>
 
@@ -71,6 +72,7 @@ const AdminPanel = () => {
               <TabsContent value="navbar"><AdminNavbar /></TabsContent>
               <TabsContent value="footer"><AdminFooter /></TabsContent>
               <TabsContent value="sections"><AdminSections /></TabsContent>
+              <TabsContent value="redirects"><AdminRedirections /></TabsContent>
               <TabsContent value="settings"><AdminSettings /></TabsContent>
             </Tabs>
           </motion.div>
