@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { isAdmin } from "@/lib/admin";
 import Layout from "@/components/Layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, LayoutDashboard, Users, Newspaper, Wifi, Ticket, Settings, CreditCard, Navigation, PanelBottom, Layers } from "lucide-react";
+import { Loader2, LayoutDashboard, Users, Newspaper, Wifi, Ticket, Settings, CreditCard, Navigation, PanelBottom, Layers, ArrowRightLeft } from "lucide-react";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import AdminUsers from "@/components/admin/AdminUsers";
 import AdminBlog from "@/components/admin/AdminBlog";
@@ -16,6 +16,7 @@ import AdminPlans from "@/components/admin/AdminPlans";
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import AdminFooter from "@/components/admin/AdminFooter";
 import AdminSections from "@/components/admin/AdminSections";
+import AdminRedirections from "@/components/admin/AdminRedirections";
 
 const AdminPanel = () => {
   const { user, loading: authLoading } = useAuth();
@@ -58,6 +59,7 @@ const AdminPanel = () => {
                 <TabsTrigger value="navbar" className="gap-2"><Navigation className="h-4 w-4" /> Navbar</TabsTrigger>
                 <TabsTrigger value="footer" className="gap-2"><PanelBottom className="h-4 w-4" /> Footer</TabsTrigger>
                 <TabsTrigger value="sections" className="gap-2"><Layers className="h-4 w-4" /> Sections</TabsTrigger>
+                <TabsTrigger value="redirects" className="gap-2"><ArrowRightLeft className="h-4 w-4" /> Redirects</TabsTrigger>
                 <TabsTrigger value="settings" className="gap-2"><Settings className="h-4 w-4" /> Settings</TabsTrigger>
               </TabsList>
 
@@ -70,6 +72,7 @@ const AdminPanel = () => {
               <TabsContent value="navbar"><AdminNavbar /></TabsContent>
               <TabsContent value="footer"><AdminFooter /></TabsContent>
               <TabsContent value="sections"><AdminSections /></TabsContent>
+              <TabsContent value="redirects"><AdminRedirections /></TabsContent>
               <TabsContent value="settings"><AdminSettings /></TabsContent>
             </Tabs>
           </motion.div>
